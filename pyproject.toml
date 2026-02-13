@@ -5,6 +5,13 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
+    "kaki>=0.1.9",
     "kivy>=2.3.1",
+    "kivy-reloader>=0.8.3",
+    "kivymd>=1.2.0",
     "python-dotenv>=1.2.1",
+    "watchdog>=6.0.0",
 ]
+
+[tool.uv.sources]
+kivymd = { url = "https://github.com/kivymd/KivyMD/archive/master.zip" }
