@@ -9,6 +9,7 @@ from kivymd.uix.snackbar import (
     MDSnackbarCloseButton,
 )
 from kivy.metrics import dp
+from kivy.properties import ObjectProperty
 
 # Local Imports
 from components.TopBar import TopBar
@@ -21,10 +22,15 @@ from kivy.core.window import Window
 
 
 class WeatherApp(MDApp):
+    bg_widget = ObjectProperty(None, allownone=True)
+
     def build(self):
         self.theme_cls.primary_palette = "Blue"
         Window.size = (390, 780)
         self.screen = MDScreen(md_bg_color=[0.965, 0.969, 0.973, 1])  # #F6F7F8
+
+        # Create background FIRST so FrostedGlass can reference it
+        self.bg_widget = Background()
 
         self.top_bar = TopBar()
         self.details_section = Details()
@@ -50,7 +56,7 @@ class WeatherApp(MDApp):
             orientation="horizontal",
         )
 
-        self.screen.add_widget(Background())
+        self.screen.add_widget(self.bg_widget)
         self.screen.add_widget(self.details_section)
         self.screen.add_widget(self.top_bar)
 
@@ -80,6 +86,10 @@ class WeatherApp(MDApp):
 
         if result["status"]:
             self.details_section.update_data(result["data"])
+            # Update city name in top bar
+            city = result["data"].get("name", "")
+            if city:
+                self.top_bar.city_name = f"⌂ {city}"
         else:
             self.show_error(result["error"])
 

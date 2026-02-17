@@ -22,7 +22,8 @@ Section = """
 
             # City name
             MDBoxLayout:
-                adaptive_height: True
+                size_hint_y: None
+                height: "24dp"
                 spacing: "4dp"
                 pos_hint: {"center_x": 0.5}
                 size_hint_x: None
@@ -51,17 +52,19 @@ Section = """
                 theme_text_color: "Custom"
                 text_color: 1, 1, 1, 1
                 font_size: "180sp"
-                size_hint_y: None
-                height: "110dp"
+                adateptive_size: True
+                size_hint: None, None
+                size: self.texture_size
                 pos_hint: {"center_x": 0.5}
 
             # Temperature
             MDBoxLayout:
-                adaptive_height: True
+                size_hint_y: None
+                height: "50dp"
                 size_hint_x: None
                 width: self.minimum_width
                 pos_hint: {"center_x": .5}
-
+                orientation: "horizontal"
                 MDLabel:
                     text: f"{int(root.weather['main']['temp'])}"
                     font_size: "80sp"
@@ -73,9 +76,9 @@ Section = """
                     text: "°C"
                     font_size: "26sp"
                     theme_text_color: "Custom"
-                    text_color: 1, 1, 1, 0.85
+                    text_color: 1, 1, 1, 1
                     adaptive_size: True
-                    pos_hint: {"top": 0.85}
+                    
 
             # Description
             MDLabel:
@@ -84,7 +87,8 @@ Section = """
                 font_size: "18sp"
                 theme_text_color: "Custom"
                 text_color: 1, 1, 1, 0.9
-                adaptive_height: True
+                size_hint_y: None
+                height: "24dp"
 
             # H/L Pill
             MDBoxLayout:
@@ -136,7 +140,8 @@ Section = """
                         radius: self.radius
 
                 MDBoxLayout:
-                    adaptive_height: True
+                    size_hint_y: None
+                    height: "28dp"
                     padding: ["0dp", "0dp", "0dp", "8dp"]
 
                     MDLabel:
@@ -314,7 +319,8 @@ Section = """
                         radius: self.radius
 
                 MDBoxLayout:
-                    adaptive_height: True
+                    size_hint_y: None
+                    height: "28dp"
                     padding: ["0dp", "0dp", "0dp", "10dp"]
 
                     MDLabel:
