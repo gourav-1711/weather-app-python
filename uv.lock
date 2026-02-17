@@ -322,6 +322,15 @@ wheels = [
 ]
 
 [[package]]
+name = "kivy-garden-frostedglass"
+version = "0.5.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/8f/de/3c308be692e233125e4c00bf56296035fe05d581e447f1e8506e20eb6725/kivy_garden.frostedglass-0.5.0.tar.gz", hash = "sha256:37fd67ce194ebbabf1596f67792352b5121a9609205c6666d3bd9c9cf69527ea", size = 12195, upload-time = "2023-05-28T15:17:29.834Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/64/fa/941b67bfbd00fa20a2f29d4ff5a10da7ec613b042babb84b867a62203494/kivy_garden.frostedglass-0.5.0-py3-none-any.whl", hash = "sha256:b201e46c72123334843011f86bb98d74b35ee60446084ee28f06c749bf3e96f3", size = 10526, upload-time = "2023-05-28T15:17:28.017Z" },
+]
+
+[[package]]
 name = "kivy-reloader"
 version = "0.8.3"
 source = { registry = "https://pypi.org/simple" }
@@ -341,6 +350,18 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/3d/0f/a7f1361f4ae0d4460534ee795c17ba4bd8f25c737e83cc0bb0247a5816e3/kivy_reloader-0.8.3.tar.gz", hash = "sha256:fd5bfec8443b71a81824cfef7e004846791ade5239315d74da91316250c72aef", size = 168687, upload-time = "2025-12-27T16:13:21.235Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/0e/4a/fca3604a9020766212ecb6771a5bc9d44c78504496fea9bdd242cf7d794a/kivy_reloader-0.8.3-py3-none-any.whl", hash = "sha256:c77930dca1c64040b2f857cd0bf63ff6e9671df71816ff5fb85e958e6904eb68", size = 209184, upload-time = "2025-12-27T16:13:18.711Z" },
+]
+
+[[package]]
+name = "kivygradient"
+version = "0.0.5"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "kivy" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/1a/21/778ab6c80cea719963304981ce2a7a7da0d85f95f87f1714220d41a33094/kivygradient-0.0.5.tar.gz", hash = "sha256:fe41e5e701540aebd90b3c3dcbe8cf0d5bc28bb6dd9a9551afd38a09ef2181f8", size = 2606, upload-time = "2024-08-24T04:07:56.049Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/33/81/ddd630301ab7fd98da114698971422051c57193b64118b14ddfcde5586ea/KivyGradient-0.0.5-py3-none-any.whl", hash = "sha256:4d564a6d9ac7ca50c0f4288dfec47e176341eeb372dd901304fbf158b64d781c", size = 2747, upload-time = "2024-08-24T04:07:54.51Z" },
 ]
 
 [[package]]
@@ -831,7 +852,9 @@ source = { virtual = "." }
 dependencies = [
     { name = "kaki" },
     { name = "kivy" },
+    { name = "kivy-garden-frostedglass" },
     { name = "kivy-reloader" },
+    { name = "kivygradient" },
     { name = "kivymd" },
     { name = "python-dotenv" },
     { name = "watchdog" },
@@ -841,7 +864,9 @@ dependencies = [
 requires-dist = [
     { name = "kaki", specifier = ">=0.1.9" },
     { name = "kivy", specifier = ">=2.3.1" },
+    { name = "kivy-garden-frostedglass", specifier = ">=0.5.0" },
     { name = "kivy-reloader", specifier = ">=0.8.3" },
+    { name = "kivygradient", specifier = ">=0.0.5" },
     { name = "kivymd", url = "https://github.com/kivymd/KivyMD/archive/master.zip" },
     { name = "python-dotenv", specifier = ">=1.2.1" },
     { name = "watchdog", specifier = ">=6.0.0" },
