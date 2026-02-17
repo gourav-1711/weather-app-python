@@ -13,7 +13,7 @@ Section = """
             size_hint_y: None
             height: self.minimum_height
             spacing: "8dp"
-            padding: ["0dp", "0dp", "0dp", "60dp"]
+            padding: ["0dp", "20dp", "0dp", "60dp"]
 
             # ===== HERO SECTION =====
             Widget:

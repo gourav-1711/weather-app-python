@@ -10,8 +10,8 @@ from kivymd.uix.snackbar import (
 )
 from kivy.metrics import dp
 from kivy.properties import ObjectProperty
+from kivy.clock import Clock
 
-# Local Imports
 from components.TopBar import TopBar
 from components.Details import Details
 from components.Loading import overlayLoading
@@ -27,10 +27,11 @@ class WeatherApp(MDApp):
     def build(self):
         self.theme_cls.primary_palette = "Blue"
         Window.size = (390, 780)
-        self.screen = MDScreen(md_bg_color=[0.965, 0.969, 0.973, 1])  # #F6F7F8
+        self.screen = MDScreen(md_bg_color=[0.965, 0.969, 0.973, 1])
 
-        # Create background FIRST so FrostedGlass can reference it
-        self.bg_widget = Background()
+        # Background MUST be created and assigned before TopBar is added
+        self.bg = Background()
+        self.bg_widget = self.bg  # FrostedGlass references app.bg_widget
 
         self.top_bar = TopBar()
         self.details_section = Details()
@@ -41,7 +42,6 @@ class WeatherApp(MDApp):
             MDSnackbarActionButtonText(text="Retry"),
             on_release=lambda x: self.retry_last_search(),
         )
-
         self.snackbar = MDSnackbar(
             self.snack_text,
             MDSnackbarButtonContainer(
@@ -56,7 +56,8 @@ class WeatherApp(MDApp):
             orientation="horizontal",
         )
 
-        self.screen.add_widget(self.bg_widget)
+        # Order matters: background first, then content, then top bar on top
+        self.screen.add_widget(self.bg)
         self.screen.add_widget(self.details_section)
         self.screen.add_widget(self.top_bar)
 
@@ -64,29 +65,25 @@ class WeatherApp(MDApp):
         return self.screen
 
     def on_start(self):
-        self.search_weather("Delhi")
-
-    # --- LOGIC ---
+        # Delay first search one frame so layout is fully built
+        Clock.schedule_once(lambda dt: self.search_weather("Delhi"), 0)
 
     def search_weather(self, city_name):
         if city_name == self.last_city:
             return
         self.last_city = city_name
         self.screen.add_widget(self.loading_spinner)
-
         get_weather(city_name, self.on_weather_result)
 
     def retry_last_search(self):
         self.snackbar.dismiss()
-        self.last_city = ""  # Reset so retry works
+        self.last_city = ""
         self.search_weather(self.last_city)
 
     def on_weather_result(self, result):
         self.screen.remove_widget(self.loading_spinner)
-
         if result["status"]:
             self.details_section.update_data(result["data"])
-            # Update city name in top bar
             city = result["data"].get("name", "")
             if city:
                 self.top_bar.city_name = f"⌂ {city}"
@@ -97,8 +94,6 @@ class WeatherApp(MDApp):
         self.snack_text.text = message
         if not self.snackbar.parent:
             self.snackbar.open()
-        else:
-            pass
 
 
 if __name__ == "__main__":
